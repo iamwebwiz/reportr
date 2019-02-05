@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="app">
-        <Home />fuck you
+        <Home />
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
