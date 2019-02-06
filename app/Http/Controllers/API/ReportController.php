@@ -32,7 +32,10 @@ class ReportController extends Controller
                 'message' => 'Report sent successfully!'
             ], 200);
         } catch (\Exception $e) {
-            return response()->json('Unable to send report. Please try again!');
+            return response()->json([
+                'message' => 'Unable to send. Try again!',
+                'stack' => $e->getMessage()
+            ]);
         }
     }
 }
