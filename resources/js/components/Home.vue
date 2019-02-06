@@ -30,11 +30,12 @@
                         </div>
                     </div>
                     <button class="btn btn-primary btn-block mt-3" @click="addTask">Add</button>
-                    <button class="btn btn-info btn-block mt-2" @click="showTasks">Show Tasks</button>
                 </div>
                 <div class="form-group">
                     <textarea v-model="comments" placeholder="Comments" class="form-control"></textarea>
                 </div>
+
+                <button @click="sendReport" class="btn btn-success btn-md btn-block">Submit Report</button>
             </div>
         </div>
     </div>
@@ -42,7 +43,7 @@
 
 <script>
     export default {
-        data () {
+        data: function () {
             return {
                 tasks: [],
                 comments: '',
@@ -55,22 +56,44 @@
         },
 
         methods: {
-            addTask () {
+            addTask: function () {
                 this.tasks.push({content: ''})
-                console.log('Task added')
             },
 
-            removeTask (index) {
+            removeTask: function (index) {
                 this.tasks.splice(index, 1)
             },
 
-            showTasks () {
-                this.tasks.map(task => console.log(task.content))
+            sendReport: function () {
+                axios.post('/api/reports', {
+                    tasks: this.tasks,
+                    comments: this.comments,
+                    duration: this.duration,
+                    reportDate: this.reportDate,
+                    employeeName: this.employeeName,
+                    reportTitle: this.reportTitle,
+                    companyName: this.companyName
+                }).then(response => {
+                    console.log(response.data)
+                    this.reset()
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+            reset: function () {
+                this.tasks = []
+                this.comments = ''
+                this.duration = ''
+                this.reportDate = ''
+                this.employeeName = ''
+                this.reportTitle = ''
+                this.companyName = ''
             }
         },
 
         watch: {
-            companyName (value) {
+            companyName: function (value) {
                 if (value.toLowerCase().indexOf('medflit') !== -1) {
                     this.reportTitle = 'Medflit Task Report Sheet'
                 } else {
