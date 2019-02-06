@@ -34,6 +34,8 @@
                 <div class="form-group">
                     <textarea v-model="comments" placeholder="Comments" class="form-control"></textarea>
                 </div>
+
+                <button @click="sendReport" class="btn btn-success btn-md btn-block">Submit Report</button>
             </div>
         </div>
     </div>
@@ -41,7 +43,7 @@
 
 <script>
     export default {
-        data () {
+        data: function () {
             return {
                 tasks: [],
                 comments: '',
@@ -54,18 +56,32 @@
         },
 
         methods: {
-            addTask () {
+            addTask: function () {
                 this.tasks.push({content: ''})
                 console.log('Task added')
             },
 
-            removeTask (index) {
+            removeTask: function (index) {
                 this.tasks.splice(index, 1)
+            },
+
+            sendReport: function () {
+                axios.post('/api/reports/new', {
+                    reportTitle: this.reportTitle
+                }).then(response => {
+                    console.log(response.data)
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+            reset: function () {
+                //
             }
         },
 
         watch: {
-            companyName (value) {
+            companyName: function (value) {
                 if (value.toLowerCase().indexOf('medflit') !== -1) {
                     this.reportTitle = 'Medflit Task Report Sheet'
                 } else {

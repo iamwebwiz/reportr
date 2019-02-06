@@ -1805,6 +1805,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1827,10 +1828,16 @@ __webpack_require__.r(__webpack_exports__);
     removeTask: function removeTask(index) {
       this.tasks.splice(index, 1);
     },
-    showTasks: function showTasks() {
-      this.tasks.map(function (task) {
-        return console.log(task.content);
+    sendReport: function sendReport() {
+      axios.post('/api/reports/new', {
+        reportTitle: this.reportTitle
+      }).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
       });
+    },
+    reset: function reset() {//
     }
   },
   watch: {
@@ -19777,15 +19784,6 @@ var render = function() {
                   on: { click: _vm.addTask }
                 },
                 [_vm._v("Add")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-info btn-block mt-2",
-                  on: { click: _vm.showTasks }
-                },
-                [_vm._v("Show Tasks")]
               )
             ],
             2
@@ -19813,7 +19811,16 @@ var render = function() {
                 }
               }
             })
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-md btn-block",
+              on: { click: _vm.sendReport }
+            },
+            [_vm._v("Submit Report")]
+          )
         ]
       )
     ])
