@@ -58,7 +58,6 @@
         methods: {
             addTask: function () {
                 this.tasks.push({content: ''})
-                console.log('Task added')
             },
 
             removeTask: function (index) {
@@ -66,17 +65,30 @@
             },
 
             sendReport: function () {
-                axios.post('/api/reports/new', {
-                    reportTitle: this.reportTitle
+                axios.post('/api/reports', {
+                    tasks: this.tasks,
+                    comments: this.comments,
+                    duration: this.duration,
+                    reportDate: this.reportDate,
+                    employeeName: this.employeeName,
+                    reportTitle: this.reportTitle,
+                    companyName: this.companyName
                 }).then(response => {
                     console.log(response.data)
+                    this.reset()
                 }).catch(error => {
                     console.log(error)
                 })
             },
 
             reset: function () {
-                //
+                this.tasks = []
+                this.comments = ''
+                this.duration = ''
+                this.reportDate = ''
+                this.employeeName = ''
+                this.reportTitle = ''
+                this.companyName = ''
             }
         },
 
