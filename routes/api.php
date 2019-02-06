@@ -18,7 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('API')->group(function () {
-    Route::prefix('reports')->group(function () {
-        Route::post('/new', 'ReportController@sendReport');
-    });
+    Route::post('/reports', 'ReportController@sendReport');
 });
