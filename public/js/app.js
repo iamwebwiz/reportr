@@ -1823,21 +1823,37 @@ __webpack_require__.r(__webpack_exports__);
       this.tasks.push({
         content: ''
       });
-      console.log('Task added');
     },
     removeTask: function removeTask(index) {
       this.tasks.splice(index, 1);
     },
     sendReport: function sendReport() {
-      axios.post('/api/reports/new', {
-        reportTitle: this.reportTitle
+      var _this = this;
+
+      axios.post('/api/reports', {
+        tasks: this.tasks,
+        comments: this.comments,
+        duration: this.duration,
+        reportDate: this.reportDate,
+        employeeName: this.employeeName,
+        reportTitle: this.reportTitle,
+        companyName: this.companyName
       }).then(function (response) {
         console.log(response.data);
+
+        _this.reset();
       }).catch(function (error) {
         console.log(error);
       });
     },
-    reset: function reset() {//
+    reset: function reset() {
+      this.tasks = [];
+      this.comments = '';
+      this.duration = '';
+      this.reportDate = '';
+      this.employeeName = '';
+      this.reportTitle = '';
+      this.companyName = '';
     }
   },
   watch: {
