@@ -30,7 +30,6 @@
                         </div>
                     </div>
                     <button class="btn btn-primary btn-block mt-3" @click="addTask">Add</button>
-                    <button class="btn btn-info btn-block mt-2" @click="showTasks">Show Tasks</button>
                 </div>
                 <div class="form-group">
                     <textarea v-model="comments" placeholder="Comments" class="form-control"></textarea>
@@ -62,10 +61,6 @@
 
             removeTask (index) {
                 this.tasks.splice(index, 1)
-            },
-
-            showTasks () {
-                this.tasks.map(task => console.log(task.content))
             }
         },
 
