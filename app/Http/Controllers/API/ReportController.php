@@ -6,6 +6,7 @@ use App\Mail\ReportMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class ReportController extends Controller
 {
