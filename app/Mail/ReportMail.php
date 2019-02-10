@@ -14,14 +14,14 @@ class ReportMail extends Mailable
     /**
      * Array of data being sent to view
      */
-    public $data = array();
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(array $data)
+    public function __construct($data)
     {
         $this->data = $data;
     }
