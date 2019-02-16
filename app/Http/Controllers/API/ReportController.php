@@ -21,8 +21,6 @@ class ReportController extends Controller
     {
         DB::beginTransaction();
 
-        $report = new Report();
-
         $report = Report::create([
             'company_name' => request('companyName'),
             'report_title' => request('reportTitle'),
