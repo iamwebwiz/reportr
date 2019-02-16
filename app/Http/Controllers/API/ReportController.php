@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Report;
 use App\Mail\ReportMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
-use PDF;
 
 class ReportController extends Controller
 {
@@ -18,25 +19,23 @@ class ReportController extends Controller
      */
     public function sendReport(Request $request)
     {
-        $data = array();
-        $data['companyName'] = request('companyName');
-        $data['reportTitle'] = request('reportTitle');
-        $data['employeeName'] = request('employeeName');
-        $data['reportDate'] = request('reportDate');
-        $data['duration'] = request('duration');
-        $data['tasks'] = request('tasks');
-        $data['comments'] = request('comments');
+        DB::beginTransaction();
 
-        try {
-            Mail::to('iamwebwiz@gmail.com')->send(new ReportMail($data));
-            return response()->json([
-                'message' => 'Report sent successfully!'
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Unable to send. Try again!',
-                'stack' => $e->getMessage()
-            ]);
-        }
+        $report = new Report();
+
+        $report = Report::create([
+            'company_name' => request('companyName'),
+            'report_title' => request('reportTitle'),
+            'employee_name' => request('employeeName'),
+            'report_date' => request('reportDate'),
+            'duration' => request('duration'),
+            'tasks' => request('tasks'),
+            'comments' => request('comments')
+        ]);
+
+        if ($report)
+            DB::commit();
+        else
+            DB::rollback();
     }
 }
