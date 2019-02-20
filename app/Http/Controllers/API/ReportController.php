@@ -36,11 +36,20 @@ class ReportController extends Controller
             $report_id = $report->id;
             $report = Report::where('id', $report_id)->first();
 
-            $path = 'storage/pdfs/' . str_random(25) . '.pdf';
+            $path = 'storage/pdfs/' . $report_id . '.pdf';
             $pdf = PDF::loadView('pdfView', compact('report'));
             $pdf->save($path);
 
-            return $pdf->stream();
+            $data = array (
+                'reportId' => $report_id,
+                'companyName' => $report->company_name,
+                'name' => $report->employee_name,
+                'reportDate' => $report->report_date
+            );
+
+            Mail::to('itzchristar@gmail.com')->send(new ReportMail($data));
+
+            return 'Email was sent';
 
         } else {
             DB::rollback();

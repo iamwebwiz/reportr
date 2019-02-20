@@ -8,7 +8,7 @@
     </head>
   <body>
 
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
       <tr>
         <th>Id</th>
