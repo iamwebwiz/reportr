@@ -11,16 +11,4 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function index()
-    {
-        $report = Report::where('id', 7)->first();
-
-
-        $pdf = PDF::loadView('pdfView', compact('report'));
-        return $pdf->stream();
-  
-
-        // return response()->download('storage/pdfs/Dv92rwLagYF7MLPzv7v78Hnuf.pdf');
-    }
 }

@@ -33,6 +33,16 @@ class ReportMail extends Mailable
      */
     public function build()
     {
-        return $this->view('report');
+        $address = 'ChrisOchuko@example.com';
+        $subject = 'Reportr';
+        $name = 'Chris Ochuko';
+        
+        return $this->view('mail')
+                    ->from($address, $name)
+                    ->cc($address, $name)
+                    ->bcc($address, $name)
+                    ->replyTo($address, $name)
+                    ->subject($subject)
+                    ->with($this->data);
     }
 }
