@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/viewPdf/{id}', 'returnController@index');
+Route::get('/downloadPdf/{id}', 'returnController@download');

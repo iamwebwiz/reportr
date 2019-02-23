@@ -20,7 +20,7 @@ class CreateReportsTable extends Migration
             $table->string('employee_name');
             $table->date('report_date');
             $table->string('duration');
-            $table->text('tasks');
+            $table->string('tasks');
             $table->text('comments');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -19,21 +20,41 @@ class ReportController extends Controller
      */
     public function sendReport(Request $request)
     {
-        DB::beginTransaction();
 
-        $report = Report::create([
-            'company_name' => request('companyName'),
-            'report_title' => request('reportTitle'),
-            'employee_name' => request('employeeName'),
-            'report_date' => request('reportDate'),
-            'duration' => request('duration'),
-            'tasks' => request('tasks'),
-            'comments' => request('comments')
-        ]);
+        if($request->isMethod('post')){
+            $report = new Report;
 
-        if ($report)
-            DB::commit();
-        else
+            $report->company_name = $request->companyName;
+            $report->report_title = $request->reportTitle;
+            $report->employee_name = $request->employeeName;
+            $report->report_date = $request->reportDate;
+            $report->duration = $request->duration;
+            $report->tasks = json_encode($request->tasks);
+            $report->comments = $request->comments;
+            $report->save();
+
+            $report_id = $report->id;
+            $report = Report::where('id', $report_id)->first();
+
+            $path = 'storage/pdfs/' . $report_id . '.pdf';
+            $pdf = PDF::loadView('pdfView', compact('report'));
+            $pdf->save($path);
+
+            $data = array (
+                'reportId' => $report_id,
+                'companyName' => $report->company_name,
+                'name' => $report->employee_name,
+                'reportDate' => $report->report_date
+            );
+
+            Mail::to('itzchristar@gmail.com')->send(new ReportMail($data));
+
+            return 'Email was sent';
+
+        } else {
             DB::rollback();
+        }
+       
+            
     }
 }
