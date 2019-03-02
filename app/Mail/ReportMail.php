@@ -14,16 +14,16 @@ class ReportMail extends Mailable
     /**
      * Array of data being sent to view
      */
-    public $data;
+    public $report;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($report)
     {
-        $this->data = $data;
+        $this->report = $report;
     }
 
     /**
@@ -33,13 +33,12 @@ class ReportMail extends Mailable
      */
     public function build()
     {
-        $address = 'iamwebwiz@gmail.com';
-        $subject = 'Report for '. now()->toDateString();
-        $name = 'Ezekiel Oladejo';
+        $reportDate = $this->report['report_date'];
+        $reportDate = date('d/m/Y', strtotime($reportDate));
 
         return $this->view('mail')
-                    ->from($address, $name)
-                    ->subject($subject)
-                    ->with($this->data);
+                    ->from($this->report['sender_email'], $this->report['sender_name'])
+                    ->subject("Report for {$reportDate}")
+                    ->attach(storage_path('app/public/reports/'.$this->report['id'].'.pdf'));
     }
 }
