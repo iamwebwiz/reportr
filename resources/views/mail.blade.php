@@ -7,7 +7,7 @@
 <title>Report Mail</title>
 
 <style>
-			
+
 		/* -------------------------------------
 		GLOBAL
 		A very basic CSS reset
@@ -18,11 +18,11 @@
 		box-sizing: border-box;
 		font-size: 14px;
 	}
-	
+
 	img {
 		max-width: 100%;
 	}
-	
+
 	body {
 		-webkit-font-smoothing: antialiased;
 		-webkit-text-size-adjust: none;
@@ -32,24 +32,24 @@
 		/* 1.6em * 14px = 22.4px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
 		/*line-height: 22px;*/
 	}
-	
+
 	/* Let's make sure all tables have defaults */
 	table td {
 		vertical-align: top;
 	}
-	
+
 	/* -------------------------------------
 		BODY & CONTAINER
 	------------------------------------- */
 	body {
 		background-color: #f6f6f6;
 	}
-	
+
 	.body-wrap {
 		background-color: #f6f6f6;
 		width: 100%;
 	}
-	
+
 	.container {
 		display: block !important;
 		max-width: 600px !important;
@@ -57,14 +57,14 @@
 		/* makes it centered */
 		clear: both !important;
 	}
-	
+
 	.content {
 		max-width: 600px;
 		margin: 0 auto;
 		display: block;
 		padding: 20px;
 	}
-	
+
 	/* -------------------------------------
 		HEADER, FOOTER, MAIN
 	------------------------------------- */
@@ -73,20 +73,20 @@
 		border: 1px solid #e9e9e9;
 		border-radius: 3px;
 	}
-	
+
 	.content-wrap {
 		padding: 20px;
 	}
-	
+
 	.content-block {
 		padding: 0 0 20px;
 	}
-	
+
 	.header {
 		width: 100%;
 		margin-bottom: 20px;
 	}
-	
+
 	.footer {
 		width: 100%;
 		clear: both;
@@ -97,7 +97,7 @@
 		color: #999;
 		font-size: 12px;
 	}
-	
+
 	/* -------------------------------------
 		TYPOGRAPHY
 	------------------------------------- */
@@ -108,31 +108,31 @@
 		line-height: 1.2em;
 		font-weight: 400;
 	}
-	
+
 	h1 {
 		font-size: 32px;
 		font-weight: 500;
 		/* 1.2em * 32px = 38.4px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
 		/*line-height: 38px;*/
 	}
-	
+
 	h2 {
 		font-size: 24px;
 		/* 1.2em * 24px = 28.8px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
 		/*line-height: 29px;*/
 	}
-	
+
 	h3 {
 		font-size: 18px;
 		/* 1.2em * 18px = 21.6px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
 		/*line-height: 22px;*/
 	}
-	
+
 	h4 {
 		font-size: 14px;
 		font-weight: 600;
 	}
-	
+
 	p, ul, ol {
 		margin-bottom: 10px;
 		font-weight: normal;
@@ -141,7 +141,7 @@
 		margin-left: 5px;
 		list-style-position: inside;
 	}
-	
+
 	/* -------------------------------------
 		LINKS & BUTTONS
 	------------------------------------- */
@@ -149,7 +149,7 @@
 		color: #348eda;
 		text-decoration: underline;
 	}
-	
+
 	.btn-primary {
 		text-decoration: none;
 		color: #FFF;
@@ -166,34 +166,34 @@
 		border-radius: 5px;
 		text-transform: capitalize;
 	}
-	
+
 	/* -------------------------------------
 		OTHER STYLES THAT MIGHT BE USEFUL
 	------------------------------------- */
 	.last {
 		margin-bottom: 0;
 	}
-	
+
 	.first {
 		margin-top: 0;
 	}
-	
+
 	.aligncenter {
 		text-align: center;
 	}
-	
+
 	.alignright {
 		text-align: right;
 	}
-	
+
 	.alignleft {
 		text-align: left;
 	}
-	
+
 	.clear {
 		clear: both;
 	}
-	
+
 	/* -------------------------------------
 		ALERTS
 		Change the class depending on warning email, good email or bad email
@@ -221,7 +221,7 @@
 	.alert.alert-good {
 		background-color: #68B90F;
 	}
-	
+
 	/* -------------------------------------
 		INVOICE
 		Styles for the billing table
@@ -245,7 +245,7 @@
 		border-bottom: 2px solid #333;
 		font-weight: 700;
 	}
-	
+
 	/* -------------------------------------
 		RESPONSIVE AND MOBILE FRIENDLY STYLES
 	------------------------------------- */
@@ -253,42 +253,42 @@
 		body {
 		padding: 0 !important;
 		}
-	
+
 		h1, h2, h3, h4 {
 		font-weight: 800 !important;
 		margin: 20px 0 5px !important;
 		}
-	
+
 		h1 {
 		font-size: 22px !important;
 		}
-	
+
 		h2 {
 		font-size: 18px !important;
 		}
-	
+
 		h3 {
 		font-size: 16px !important;
 		}
-	
+
 		.container {
 		padding: 0 !important;
 		width: 100% !important;
 		}
-	
+
 		.content {
 		padding: 0 !important;
 		}
-	
+
 		.content-wrap {
 		padding: 10px !important;
 		}
-	
+
 		.invoice {
 		width: 100% !important;
 		}
 	}
-	
+
 	/*# sourceMappingURL=styles.css.map */
 
 </style>
@@ -304,7 +304,7 @@
 				<table class="main" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
 						<td class="alert alert-warning">
-							Mail Reportr -> {!! $data['companyName'] !!}
+							Task Report
 						</td>
 					</tr>
 					<tr>
@@ -312,37 +312,14 @@
 							<table width="100%" cellpadding="0" cellspacing="0">
 								<tr>
 									<td class="content-block">
-										Reportr {!! $data['name'] !!}
-									</td>
-								</tr>
-								<tr>
-									<td class="content-block">
-										Hi, here is my task sheet for {!! $data['reportDate'] !!}.
-									</td>
-								</tr>
-								<tr>
-									<td class="content-block">
-									<a href="/viewPdf/{{ $data['reportId'] }}" class="btn-primary">View pdf</a> or
-									<a href="/downloadPdf/{{ $data['reportId'] }}" class="btn-primary">Download</a>
-									</td>
-								</tr>
-								<tr>
-									<td class="content-block">
-										--- Thanks for viewing this mail
+										Hello, here is my task sheet for {{ date('d/m/Y', strtotime($report['report_date'])) }}
 									</td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
-				{{-- <div class="footer">
-					<table width="100%">
-						<tr>
-							<td class="aligncenter content-block"><a href="#">Unsubscribe</a> from these alerts.</td>
-						</tr>
-					</table>
-				</div> --}}
-				
+
             </div>
 		</td>
 		<td></td>
