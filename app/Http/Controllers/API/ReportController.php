@@ -21,40 +21,29 @@ class ReportController extends Controller
     public function sendReport(Request $request)
     {
 
-        if($request->isMethod('post')){
-            $report = new Report;
+        $report = new Report();
 
-            $report->company_name = $request->companyName;
-            $report->report_title = $request->reportTitle;
-            $report->employee_name = $request->employeeName;
-            $report->report_date = $request->reportDate;
-            $report->duration = $request->duration;
-            $report->tasks = json_encode($request->tasks);
-            $report->comments = $request->comments;
-            $report->save();
+        $report->company_name = $request->companyName;
+        $report->report_title = $request->reportTitle;
+        $report->employee_name = $request->employeeName;
+        $report->report_date = $request->reportDate;
+        $report->duration = $request->duration;
+        $report->tasks = json_encode($request->tasks);
+        $report->comments = $request->comments;
+        $report->recipient = $request->recipient;
+        $report->sender_email = $request->senderEmail;
+        $report->sender_name = $request->senderName;
+        $report->save();
 
-            $report_id = $report->id;
-            $report = Report::where('id', $report_id)->first();
+        $path = 'storage/reports/' . $report['id'] . '.pdf';
+        $tasks = json_decode($report['tasks'], true);
 
-            $path = 'storage/pdfs/' . $report_id . '.pdf';
-            $pdf = PDF::loadView('pdfView', compact('report'));
-            $pdf->save($path);
+        $pdf = PDF::loadView('pdfView', compact('report', 'tasks'));
+        $pdf->save($path);
 
-            $data = array (
-                'reportId' => $report_id,
-                'companyName' => $report->company_name,
-                'name' => $report->employee_name,
-                'reportDate' => $report->report_date
-            );
+        Mail::to($report['recipient'])->send(new ReportMail($report));
 
-            Mail::to('itzchristar@gmail.com')->send(new ReportMail($data));
+        return response()->json('Report has been sent', 201);
 
-            return 'Email was sent';
-
-        } else {
-            DB::rollback();
-        }
-       
-            
     }
 }

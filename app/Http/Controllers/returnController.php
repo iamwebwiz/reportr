@@ -14,7 +14,7 @@ class returnController extends Controller
         $report_id = $id;
         $report = Report::where('id', $report_id)->first();
 
-        $path = 'storage/pdfs/' . $report_id . '.pdf';
+        $path = 'storage/reports/' . $report_id . '.pdf';
         $pdf = PDF::loadView('pdfView', compact('report'));
         return $pdf->stream();
     }
@@ -24,7 +24,7 @@ class returnController extends Controller
         $report_id = $id;
         $report = Report::where('id', $report_id)->first();
 
-        $path = 'storage/pdfs/' . $report_id . '.pdf';
+        $path = 'storage/reports/' . $report_id . '.pdf';
         $fileName = $report->employee_name .'_'. $report->report_date .'.pdf';
         $pdf = PDF::loadView('pdfView', compact('report'));
         return $pdf->download($fileName);
