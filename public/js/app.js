@@ -1806,6 +1806,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1815,7 +1824,11 @@ __webpack_require__.r(__webpack_exports__);
       reportDate: '',
       employeeName: '',
       reportTitle: '',
-      companyName: ''
+      companyName: '',
+      recipient: '',
+      senderEmail: '',
+      senderName: '',
+      sending: false
     };
   },
   methods: {
@@ -1830,6 +1843,7 @@ __webpack_require__.r(__webpack_exports__);
     sendReport: function sendReport() {
       var _this = this;
 
+      this.sending = true;
       axios.post('/api/reports', {
         tasks: this.tasks,
         comments: this.comments,
@@ -1837,13 +1851,17 @@ __webpack_require__.r(__webpack_exports__);
         reportDate: this.reportDate,
         employeeName: this.employeeName,
         reportTitle: this.reportTitle,
-        companyName: this.companyName
+        companyName: this.companyName,
+        recipient: this.recipient,
+        senderEmail: this.senderEmail,
+        senderName: this.senderName
       }).then(function (response) {
         console.log(response.data);
 
         _this.reset();
       }).catch(function (error) {
         console.log(error);
+        _this.sending = false;
       });
     },
     reset: function reset() {
@@ -1854,6 +1872,10 @@ __webpack_require__.r(__webpack_exports__);
       this.employeeName = '';
       this.reportTitle = '';
       this.companyName = '';
+      this.recipient = '';
+      this.senderEmail = '';
+      this.senderName = '';
+      this.sending = false;
     }
   },
   watch: {
@@ -19630,6 +19652,78 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
+                  value: _vm.recipient,
+                  expression: "recipient"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "email", placeholder: "Recipient Email Address" },
+              domProps: { value: _vm.recipient },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.recipient = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.senderEmail,
+                  expression: "senderEmail"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "email", placeholder: "Your Email Address" },
+              domProps: { value: _vm.senderEmail },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.senderEmail = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.senderName,
+                  expression: "senderName"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Your Name" },
+              domProps: { value: _vm.senderName },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.senderName = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
                   value: _vm.companyName,
                   expression: "companyName"
                 }
@@ -19833,6 +19927,7 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-success btn-md btn-block",
+              attrs: { disabled: _vm.sending },
               on: { click: _vm.sendReport }
             },
             [_vm._v("Submit Report")]
@@ -31888,8 +31983,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\www\reportr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\www\reportr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\lkeme\OneDrive\Desktop\wiz\reportr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\lkeme\OneDrive\Desktop\wiz\reportr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
