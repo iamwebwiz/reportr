@@ -5,6 +5,15 @@
                 <h2 class="text-center">Reportr</h2>
                 <hr>
                 <div class="form-group">
+                    <input type="email" v-model="recipient" placeholder="Recipient Email Address" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="email" v-model="senderEmail" placeholder="Your Email Address" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" v-model="senderName" placeholder="Your Name" class="form-control">
+                </div>
+                <div class="form-group">
                     <input type="text" v-model="companyName" placeholder="Company Name" class="form-control">
                 </div>
                 <div class="form-group">
@@ -35,14 +44,14 @@
                     <textarea v-model="comments" placeholder="Comments" class="form-control"></textarea>
                 </div>
 
-                <button @click="sendReport" class="btn btn-success btn-md btn-block">Submit Report</button>
+                <button @click="sendReport" class="btn btn-success btn-md btn-block" :disabled="sending">Submit Report</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-   
+
     export default {
         data: function () {
             return {
@@ -52,7 +61,11 @@
                 reportDate: '',
                 employeeName: '',
                 reportTitle: '',
-                companyName: ''
+                companyName: '',
+                recipient: '',
+                senderEmail: '',
+                senderName: '',
+                sending: false,
             }
         },
 
@@ -66,6 +79,8 @@
             },
 
             sendReport: function () {
+                this.sending = true;
+
                 axios.post('/api/reports', {
                     tasks: this.tasks,
                     comments: this.comments,
@@ -73,23 +88,31 @@
                     reportDate: this.reportDate,
                     employeeName: this.employeeName,
                     reportTitle: this.reportTitle,
-                    companyName: this.companyName
+                    companyName: this.companyName,
+                    recipient: this.recipient,
+                    senderEmail: this.senderEmail,
+                    senderName: this.senderName
                 }).then(response => {
                     console.log(response.data)
                     this.reset()
                 }).catch(error => {
                     console.log(error)
+                    this.sending = false;
                 })
             },
 
             reset: function () {
-                this.tasks = []
-                this.comments = ''
-                this.duration = ''
-                this.reportDate = ''
-                this.employeeName = ''
-                this.reportTitle = ''
-                this.companyName = ''
+                this.tasks = [];
+                this.comments = '';
+                this.duration = '';
+                this.reportDate = '';
+                this.employeeName = '';
+                this.reportTitle = '';
+                this.companyName = '';
+                this.recipient = '';
+                this.senderEmail = '';
+                this.senderName = '';
+                this.sending = false;
             }
         },
 
