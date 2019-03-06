@@ -15,13 +15,13 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('company_name');
-            $table->string('report_title');
-            $table->string('employee_name');
-            $table->date('report_date');
-            $table->string('duration');
-            $table->string('tasks');
-            $table->text('comments');
+            $table->string('company_name')->nullable();
+            $table->string('report_title')->nullable();
+            $table->string('employee_name')->nullable();
+            $table->date('report_date')->nullable();
+            $table->string('duration')->nullable();
+            $table->string('tasks')->nullable();
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

@@ -51,6 +51,7 @@
 </template>
 
 <script>
+    import Toastify from 'toastify-js';
 
     export default {
         data: function () {
@@ -93,10 +94,26 @@
                     senderEmail: this.senderEmail,
                     senderName: this.senderName
                 }).then(response => {
-                    console.log(response.data)
-                    this.reset()
+                    Toastify({
+                        text: response.data,
+                        duration: 3000,
+                        gravity: "top",
+                        positionLeft: false,
+                        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                    }).showToast();
+
+                    console.log(response.data);
+                    this.reset();
                 }).catch(error => {
-                    console.log(error)
+                    Toastify({
+                        text: response.data,
+                        duration: 3000,
+                        gravity: "top",
+                        positionLeft: false,
+                        backgroundColor: "linear-gradient(to right, red, khaki)",
+                    }).showToast();
+
+                    console.log(error);
                     this.sending = false;
                 })
             },
